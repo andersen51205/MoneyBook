@@ -9,7 +9,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <!-- CSS -->
+        <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/home.css') }}" rel="stylesheet" />
         <!-- Script -->
