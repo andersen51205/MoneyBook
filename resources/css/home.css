@@ -1,0 +1,15 @@
+body {
+    background-image: linear-gradient(rgba(33, 37, 41, 0.5) 0%, rgba(33, 37, 41, 0.5) 100%), url("../img/HomeBackground.jpg");
+    background-size: cover;
+    background-position: center;
+    /* 
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover; */
+}
+.main {
+    height: 100vh;
+}
+.main h1 {
+    font-size: 3rem;
+}
