@@ -37,4 +37,31 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Show the application's login page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index() {
+        return view('Auth.Login');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @return 
+     */
+    public function login() {
+        // todo
+    }
+
+    /**
+     * Handle a logout request to the application.
+     *
+     * @return 
+     */
+    public function logout() {
+        // todo
+    }
 }

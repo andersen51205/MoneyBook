@@ -14,6 +14,7 @@
         <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/backstage.css') }}" rel="stylesheet">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -28,25 +29,23 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse fs-5" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav me-auto">
-
                         </ul>
-
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
                             @guest
-                                @if (Route::has('login'))
+                                @if (Route::has('Login'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        <a class="nav-link" href="{{ route('Login') }}">登入</a>
                                     </li>
                                 @endif
 
-                                @if (Route::has('register'))
+                                @if (Route::has('Register'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        <a class="nav-link" href="{{ route('Register') }}">註冊</a>
                                     </li>
                                 @endif
                             @else
@@ -73,7 +72,7 @@
                 </div>
             </nav>
 
-            <main class="py-4">
+            <main>
                 @yield('content')
             </main>
         </div>
