@@ -70,4 +70,22 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * Show the application's registration page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index() {
+        return view('Auth.Register');
+    }
+
+    /**
+     * Handle a registration request to the application.
+     *
+     * @return 
+     */
+    public function register() {
+        // todo
+    }
 }
