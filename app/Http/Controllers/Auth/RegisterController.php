@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -42,36 +44,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
-
-    /**
      * Show the application's registration page.
      *
      * @return \Illuminate\View\View
@@ -85,7 +57,34 @@ class RegisterController extends Controller
      *
      * @return 
      */
-    public function register() {
-        // todo
+    public function register(Request $request) {
+        // 表單驗證
+        $validated = $request->validate([
+            'username' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255',// unique:users
+            'password' => 'required|string|min:8|max:20|confirmed',
+            'agreeTerms' => 'required',
+        ]);
+        // 檢查email是否已被註冊
+        $email = User::where('email', $request['email'])
+                     ->first();
+        if($email) {
+            return response()->json([
+                'message' => '電子郵件信箱已被註冊',
+            ], 400);
+        }
+        // 註冊
+        $user = User::create([
+            'name' => $request['username'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+        // 註冊成功自動登入
+        Auth::guard()->login($user);
+        // Response
+        return response()->json([
+            'message' => '註冊成功',
+            'redirectPage' => route('UserHome_View')
+        ], 200);
     }
 }
