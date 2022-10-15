@@ -14,4 +14,6 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .css('resources/css/home.css', 'public/css')
-    .css('resources/css/backstage.css', 'public/css');
+    .css('resources/css/backstage.css', 'public/css')
+    .js('resources/js/utility/FrontendValidation.js', 'public/js/utility')
+    .js('resources/js/utility/SwalUtility.js', 'public/js/utility');

@@ -17,6 +17,8 @@
         <link href="{{ asset('css/backstage.css') }}" rel="stylesheet">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/utility/SwalUtility.js') }}" defer></script>
+        <script src="{{ asset('js/utility/FrontendValidation.js') }}" defer></script>
     </head>
     <body>
         <div id="app">
@@ -76,5 +78,6 @@
                 @yield('content')
             </main>
         </div>
+        @yield('script')
     </body>
 </html>
