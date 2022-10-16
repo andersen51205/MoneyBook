@@ -32,7 +32,7 @@
                         <label class="form-check-label ms-1" for="Input_remember_account">我同意服務條款</label>
                     </div>
                     <div class="d-inline-block">
-                        <span>已經有帳號了嗎？<a href="">登入</a></span>
+                        <span>已經有帳號了嗎？<a href="{{ route('Login_View') }}">登入</a></span>
                     </div>
                 </div>
                 <button type="button" class="btn btn-lg btn-secondary rounded-pill px-5 my-3"
@@ -50,7 +50,10 @@
         // 按鈕事件
         function formSubmit() {
             // validation
-            if(validateForm() && validatePasswordConfirmation()) {
+            if(validateForm()
+                    && validatePasswordComplexity()
+                    && validatePasswordConfirmation()
+                ) {
                 UtilSwal.formSubmit({}, function () {
                     const route = "{{ route('Register') }}";
                     const form = document.querySelector('#Form_register');

@@ -86,7 +86,7 @@ class LoginController extends Controller
         Auth::logout();
         // 重新產生sessionID並刪除舊資料
         $request->session()->invalidate();
-        // 重新產生CSRF Token？
+        // 重新產生CSRF Token
         $request->session()->regenerateToken();
         // Redirect
         return redirect()->route('Login_View');

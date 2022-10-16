@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="zh-Hant">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,17 +39,12 @@
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
                             @guest
-                                @if (Route::has('Login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('Login_View') }}">登入</a>
-                                    </li>
-                                @endif
-
-                                @if (Route::has('Register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('Register_View') }}">註冊</a>
-                                    </li>
-                                @endif
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('Login_View') }}">登入</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('Register_View') }}">註冊</a>
+                                </li>
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -57,13 +52,13 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        <a class="dropdown-item" href="{{ route('Logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        <form id="logout-form" action="{{ route('Logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
                                     </div>
