@@ -24,9 +24,10 @@ Route::get('/', 'FrontstageController@index');
 Auth::routes();
 
 Route::get('/login', 'Auth\LoginController@index')->name('Login_View');
-Route::post('/login', 'Auth\LoginController@index')->name('Login');
-Route::post('/logout', 'Auth\LoginController@index')->name('Logout');
+Route::post('/login', 'Auth\LoginController@login')->name('Login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('Logout');
 
 Route::get('/register', 'Auth\RegisterController@index')->name('Register_View');
 Route::post('/register', 'Auth\RegisterController@register')->name('Register');
-Route::get('/home', 'UserController@index')->name('home');
+
+Route::get('/home', 'UserController@index')->name('UserHome_View');

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -52,8 +55,25 @@ class LoginController extends Controller
      *
      * @return 
      */
-    public function login() {
-        // todo
+    public function login(Request $request) {
+        // 表單驗證
+        $validated = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string'
+        ]);
+        // 認證帳密
+        if (!Auth::attempt($request->only('email','password'))) {
+            return response()->json([
+                'message' => 'Email不存在或密碼錯誤',
+            ], 400);
+        }
+        // 重新產生sessionID
+        $request->session()->regenerate();
+        // Redirect
+        return response()->json([
+            'message' => 'LOGIN_SUCCESS',
+            'redirectTarget' => route('UserHome_View')
+        ], 200);
     }
 
     /**
@@ -61,7 +81,14 @@ class LoginController extends Controller
      *
      * @return 
      */
-    public function logout() {
-        // todo
+    public function logout(Request $request) {
+        // 登出使用者
+        Auth::logout();
+        // 重新產生sessionID並刪除舊資料
+        $request->session()->invalidate();
+        // 重新產生CSRF Token？
+        $request->session()->regenerateToken();
+        // Redirect
+        return redirect()->route('Login_View');
     }
 }
