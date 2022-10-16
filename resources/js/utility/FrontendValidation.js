@@ -22,7 +22,6 @@ window.validateForm = (section = document, isShowAlert = true) => {
     }
     // 格式驗證
     failedCount += validateFormEmail(section, isShowAlert);
-    failedCount += validateFormPassword(section, isShowAlert);
     return failedCount === 0;
 }
 // Input驗證
@@ -65,8 +64,8 @@ function validateFormEmail(section, isShowAlert) {
     }
     return failedCount;
 }
-// 密碼驗證
-function validateFormPassword(section, isShowAlert) {
+// 密碼複雜度驗證
+window.validatePasswordComplexity = (section = document, isShowAlert = true) => {
     const passwords = section.querySelectorAll('input[type=password]');
     let failedCount = 0;
     for(let i=0; i<passwords.length; i++) {
@@ -78,7 +77,7 @@ function validateFormPassword(section, isShowAlert) {
     if(failedCount > 0 && isShowAlert) {
         UtilSwal.showFail("密碼長度過短", "(至少8字元)");
     }
-    return failedCount;
+    return failedCount === 0;
 }
 // 確認密碼驗證
 window.validatePasswordConfirmation = (section = document, isShowAlert = true) => {
@@ -87,10 +86,9 @@ window.validatePasswordConfirmation = (section = document, isShowAlert = true) =
     if(password.value !== passwordConfirm.value) {
         password.classList.add('is-invalid');
         passwordConfirm.classList.add('is-invalid');
-        if(isShowAlert) {
-            UtilSwal.showFail('密碼確認不一致');
-        }
-        return false;
     }
-    return true;
+    if(isShowAlert) {
+        UtilSwal.showFail('密碼確認不一致');
+    }
+    return password.value === passwordConfirm.value;
 }
