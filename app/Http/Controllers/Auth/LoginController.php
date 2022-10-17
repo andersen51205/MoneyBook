@@ -38,6 +38,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        /**
+         * middleware('guest')：已登入帳號導向首頁，未登入帳號繼續請求
+         */
         $this->middleware('guest')->except('logout');
     }
 
