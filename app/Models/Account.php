@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id',
+        'name',
+        'type',
+        'amount',
+        'remark',
+        'hidden',
+    ];
 }

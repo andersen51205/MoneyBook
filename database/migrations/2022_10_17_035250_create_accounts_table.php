@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+            $table->string('name', 100);
+            $table->integer('type');
+            $table->integer('amount');
+            $table->string('remark', 200)->nullable();
+            $table->boolean('hidden')->default(false);
             $table->timestamps();
         });
     }
