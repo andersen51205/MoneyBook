@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +26,8 @@
                     </button>
                     <div id="Div_navbar_collapse" class="collapse navbar-collapse justify-content-end">
                         <div class="navbar-nav">
-                            <a class="nav-link mx-3" href="/login">Login</a>
-                            <a class="nav-link mx-3" href="/register">Register</a>
+                            <a class="nav-link mx-3" href="{{ route('Login_View') }}">登入</a>
+                            <a class="nav-link mx-3" href="{{ route('Register_View') }}">註冊</a>
                         </div>
                     </div>
                 </div>
