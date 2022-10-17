@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // 已由後台route group進行auth驗證
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('Userhome');
+        return view('UserHome');
     }
 }
