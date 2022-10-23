@@ -18,8 +18,18 @@ class Account extends Model
         'user_id',
         'name',
         'type',
+        'balance',
         'amount',
         'remark',
         'hidden',
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'hidden' => false,
     ];
 }
