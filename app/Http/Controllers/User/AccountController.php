@@ -16,6 +16,14 @@ class AccountController extends Controller
      */
     public function index()
     {
+        // Get data
+        $account = Account::where('user_id', Auth::user()->id)
+                          ->get();
+        // Response
+        return response()->json([
+            'message' => '查詢成功',
+            'account' => $account,
+        ], 200);
     }
 
     /**
@@ -36,7 +44,32 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'remark' => 'nullable|string|max:255',
+            'hidden' => 'nullable|boolean',
+        ]);
+        // Format data
+        $data = [];
+        $data['user_id'] = Auth::user()->id;
+        $data['name'] = $request['name'];
+        $data['type'] = $request['type'];
+        $data['balance'] = $request['amount'];
+        $data['amount'] = $request['amount'];
+        $data['remark'] = $request['remark'];
+        $data['hidden'] = !!$request['hidden'];
+        // Create
+        $accountId = Account::create($data)->id;
+        // Response
+        $account = Account::where('id', $accountId)
+                          ->first();
+        return response()->json([
+            'message' => '新增成功',
+            'account' => $account,
+        ], 200);
     }
 
     /**
@@ -70,7 +103,39 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validation
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'remark' => 'nullable|string|max:255',
+            'hidden' => 'nullable|boolean',
+        ]);
+        // Check Owner
+        $account = Account::where('id', $id)
+                          ->first();
+        if($account['user_id'] !== Auth::user()->id) {
+            return response()->json([
+                'message' => '不合法的操作',
+            ], 403);
+        }
+        // Calculate Balance
+        $balance = $request['amount'] - $account['amount'];
+        // Update 
+        $account['name'] = $request['name'];
+        $account['type'] = $request['type'];
+        $account['balance'] += $balance;
+        $account['amount'] = $request['amount'];
+        $account['remark'] = $request['remark'];
+        $account['hidden'] = !!$request['hidden'];
+        $account->save();
+        // Response
+        $account = Account::where('id', $account['id'])
+                          ->first();
+        return response()->json([
+            'message' => '更新成功',
+            'account' => $account,
+        ], 200);
     }
 
     /**
@@ -81,6 +146,19 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Check Owner
+        $account = Account::where('id', $id)
+                          ->first();
+        if($account['user_id'] !== Auth::user()->id) {
+            return response()->json([
+                'message' => '不合法的操作',
+            ], 403);
+        }
+        // Delete
+        $account->delete();
+        // Response
+        return response()->json([
+            'message' => '刪除成功',
+        ], 204);
     }
 }
