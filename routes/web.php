@@ -42,4 +42,5 @@ Route::post('/register', 'Auth\RegisterController@register')->name('Register');
 Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     // 首頁
     Route::get('/', 'User\UserController@index')->name('UserHome_View');
+    Route::get('/account', 'User\AccountController@index')->name('Account_View');
 });
