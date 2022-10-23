@@ -1,8 +1,17 @@
 body {
-    background: #ebebeb;
+	background: #ebebeb;
 }
 /* 自定義 invaild 提示 */
 .custom-invalid {
 	border-radius: 5px;
 	border: 1px solid #e3342f;
+}
+/* 自定義 麵包屑 */
+.breadcrumb-item {
+	color: #6c757d;
+	font-size: 1.25rem;
+}
+.breadcrumb-item.active {
+	color: #ab875f;
+	font-size: 1.25rem;
 }
