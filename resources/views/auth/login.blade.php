@@ -80,8 +80,7 @@
                 if(response['data']['redirectTarget']) {
                     window.location.assign(response['data']['redirectTarget']);
                 }
-            })
-            .catch(function (error) {
+            }).catch(function (error) {
                 // handle error
                 if(error.response.status === 400
                     || error.response.status === 422) {

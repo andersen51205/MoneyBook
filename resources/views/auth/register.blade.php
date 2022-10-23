@@ -47,7 +47,7 @@
 
 @section('script')
     <script>
-        // 按鈕事件
+        // 表單提交
         function formSubmit() {
             // validation
             if(validateForm()
@@ -66,8 +66,7 @@
                     }).then(function (response) {
                         // handle success
                         UtilSwal.submitSuccess(response['data']);
-                    })
-                    .catch(function (error) {
+                    }).catch(function (error) {
                         // handle error
                         if(error.response.status === 400
                             || error.response.status === 422) {
