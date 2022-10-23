@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
+use Auth;
 
 class AccountController extends Controller
 {
@@ -14,7 +16,6 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('User.Account');
     }
 
     /**

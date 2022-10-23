@@ -42,5 +42,15 @@ Route::post('/register', 'Auth\RegisterController@register')->name('Register');
 Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     // 首頁
     Route::get('/', 'User\UserController@index')->name('UserHome_View');
-    Route::get('/account', 'User\AccountController@index')->name('Account_View');
+    // 帳戶管理
+    Route::get('/accountManagement', 'User\UserController@account')->name('Account_View');
+});
+
+/**
+ * 後台API
+ */
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
+    // 帳戶
+    Route::get('/accounts', 'User\AccountController@index')->name('Account_List');
+    Route::post('/accounts', 'User\AccountController@store')->name('Create_Account');
 });

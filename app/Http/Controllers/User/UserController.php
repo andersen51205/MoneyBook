@@ -19,12 +19,22 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the user dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
         return view('User.Home');
+    }
+
+    /**
+     * Show the account management.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function account()
+    {
+        return view('User.Account');
     }
 }
