@@ -10,3 +10,6 @@ window.Swal = Swal.mixin({
 
 // Chart.js 套件引入
 window.Chart = require('chart.js/auto').default;
+
+// Vue3 套件引入
+window.Vue = require('vue');
