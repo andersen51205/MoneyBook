@@ -14,7 +14,7 @@
                 收入
             </button>
         </div>
-        <div id="Div_category_content" class="tab-content">
+        <div id="Div_category_content">
             <div class="d-flex justify-content-end my-3">
                 <button type="button" class="btn btn-outline-primary"
                         onclick="changePage('create')">
@@ -114,7 +114,7 @@
                             <input type="checkbox" id="Input_hide" class="form-check-input"
                                 name="hidden" value="1" v-model="categoryData['hidden']">
                             <label class="form-check-label" for="Input_hide">
-                                隱藏
+                                隱藏類別
                             </label>
                         </div>
                     </div>
