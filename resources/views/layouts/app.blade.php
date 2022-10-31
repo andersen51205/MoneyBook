@@ -38,6 +38,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('Account_View') }}">帳戶管理</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('Category_View') }}">類別管理</a>
+                                </li>
                             @endauth
                         </ul>
                         <!-- Right Side Of Navbar -->

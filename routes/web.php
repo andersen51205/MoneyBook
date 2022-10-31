@@ -44,6 +44,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     Route::get('/', 'User\UserController@index')->name('UserHome_View');
     // 帳戶管理
     Route::get('/accountManagement', 'User\UserController@account')->name('Account_View');
+    // 類別管理
+    Route::get('/categoryManagement', 'User\UserController@category')->name('Category_View');
 });
 
 /**
@@ -55,4 +57,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     Route::post('/accounts', 'User\AccountController@store')->name('Create_Account');
     Route::put('/accounts/{id}', 'User\AccountController@update')->name('Update_Account');
     Route::delete('/accounts/{id}', 'User\AccountController@destroy')->name('Delete_Account');
+    // 類別
+    Route::get('/categories', 'User\CategoryController@index')->name('Category_List');
+    Route::post('/categories', 'User\CategoryController@store')->name('Create_Category');
+    Route::put('/categories/{id}', 'User\CategoryController@update')->name('Update_Category');
+    Route::delete('/categories/{id}', 'User\CategoryController@destroy')->name('Delete_Category');
 });
