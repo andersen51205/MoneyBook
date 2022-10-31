@@ -122,8 +122,21 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        // Check Owner
+        $category = Category::where('id', $id)
+                            ->first();
+        if($category['user_id'] !== Auth::user()->id) {
+            return response()->json([
+                'message' => '不合法的操作',
+            ], 403);
+        }
+        // Delete
+        $category->delete();
+        // Response
+        return response()->json([
+            'message' => '刪除成功',
+        ], 204);
     }
 }

@@ -64,7 +64,7 @@
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                             <button type="button" class="btn btn-outline-danger m-1 delete"
-                                    v-bind:data-index="index">
+                                    v-bind:data-index="index" v-on:click="deleteCategory">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </td>
@@ -265,6 +265,45 @@
                     }
                     else {
                         this.listData = [];
+                    }
+                },
+                // 刪除類別
+                deleteCategory(event) {
+                    const el = event.currentTarget;
+                    const index = el.getAttribute('data-index');
+                    let categoryId;
+                    if(index) {
+                        const type = this.listData[index]['type'];
+                        categoryId = this.listData[index]['id'];
+                        UtilSwal.formSubmit({
+                            title: '是否確定刪除？'
+                        }, () => {
+                            let route = "{{ route('Delete_Category', 'categoryId') }}";
+                            route = route.replace('categoryId', categoryId);
+                            axios({
+                                url: route,
+                                method: "DELETE",
+                            }).then(function (response) {
+                                // handle success
+                                UtilSwal.showSuccess('刪除成功');
+                                // remove data
+                                if(type === 1) {
+                                    categoryListVm.expenditures.splice(index, 1);
+                                }
+                                else if(type === 2) {
+                                    categoryListVm.incomes.splice(index, 1);
+                                }
+                            }).catch(function (error) {
+                                // handle error
+                                if(error.response.status === 400
+                                    || error.response.status === 422) {
+                                    UtilSwal.showFail(error['response']['data']['message']);
+                                }
+                                else {
+                                    UtilSwal.submitFail();
+                                }
+                            });
+                        })
                     }
                 }
             }
