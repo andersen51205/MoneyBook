@@ -180,7 +180,7 @@
                     const index = el.getAttribute('data-index');
                     changePage('edit');
                     if(index) {
-                        accountFormVm.accountData = this.accounts[index];
+                        accountFormVm.accountData = { ...this.accounts[index] };
                         accountFormVm.accountIndex = index;
                     }
                 },
