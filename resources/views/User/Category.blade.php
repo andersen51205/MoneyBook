@@ -274,6 +274,9 @@
                     changePage('edit');
                     if(index) {
                         categoryFormVm.categoryData = { ...this.listData[index] };
+                        if(this.listData[index]['hidden']) {
+                            categoryFormVm.categoryData['hidden'] = true;
+                        }
                         categoryFormVm.categoryIndex = Number(index);
                     }
                 },
