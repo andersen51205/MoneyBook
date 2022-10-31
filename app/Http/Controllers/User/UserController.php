@@ -37,4 +37,14 @@ class UserController extends Controller
     {
         return view('User.Account');
     }
+
+    /**
+     * Show the category management.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function category()
+    {
+        return view('User.Category');
+    }
 }

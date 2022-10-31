@@ -44,6 +44,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function() {
     Route::get('/', 'User\UserController@index')->name('UserHome_View');
     // 帳戶管理
     Route::get('/accountManagement', 'User\UserController@account')->name('Account_View');
+    // 類別管理
+    Route::get('/categoryManagement', 'User\UserController@category')->name('Category_View');
 });
 
 /**
