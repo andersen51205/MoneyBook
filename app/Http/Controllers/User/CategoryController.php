@@ -16,7 +16,24 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // Get data
+        $category = Category::where('user_id', Auth::user()->id)
+                            ->get();
+        // Filter Data
+        $expenditure = $category->filter(function ($value, $key) {
+            return $value['type'] === 1;
+        })->values();
+        $income = $category->filter(function ($value, $key) {
+            return $value['type'] === 2;
+        })->values();
+        // Response
+        return response()->json([
+            'message' => '查詢成功',
+            'category' => [
+                'expenditures' => $expenditure,
+                'incomes' => $income,
+            ],
+        ], 200);
     }
 
     /**
