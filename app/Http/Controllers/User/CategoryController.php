@@ -37,7 +37,32 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation
+        $validated = $request->validate([
+            'type' => 'required|numeric',
+            'icon' => 'required|numeric',
+            'color' => 'required|numeric',
+            'name' => 'required|string|max:255',
+            'hidden' => 'nullable|boolean',
+        ]);
+        // Format data
+        $data = [];
+        $data['user_id'] = Auth::user()->id;
+        $data['type'] = $request['type'];
+        $data['icon'] = $request['icon'];
+        $data['color'] = $request['color'];
+        $data['name'] = $request['name'];
+        $data['sort'] = 0;
+        $data['hidden'] = !!$request['hidden'];
+        // Create
+        $categoryId = Category::create($data)->id;
+        // Response
+        $category = Category::where('id', $categoryId)
+                            ->first();
+        return response()->json([
+            'message' => '新增成功',
+            'category' => $category,
+        ], 200);
     }
 
     /**
