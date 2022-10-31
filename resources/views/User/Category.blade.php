@@ -60,7 +60,7 @@
                         </td>
                         <td class="operation">
                             <button type="button" class="btn btn-outline-success m-1 edit"
-                                    v-bind:data-index="index">
+                                    v-bind:data-index="index" v-on:click="editCategory">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                             <button type="button" class="btn btn-outline-danger m-1 delete"
@@ -267,6 +267,16 @@
                         this.listData = [];
                     }
                 },
+                // 編輯類別
+                editCategory(event) {
+                    const el = event.currentTarget;
+                    const index = el.getAttribute('data-index');
+                    changePage('edit');
+                    if(index) {
+                        categoryFormVm.categoryData = { ...this.listData[index] };
+                        categoryFormVm.categoryIndex = Number(index);
+                    }
+                },
                 // 刪除類別
                 deleteCategory(event) {
                     const el = event.currentTarget;
@@ -339,7 +349,7 @@
                             let route = createRoute;
                             let method = "POST";
                             if(categoryIndex !== -1) {
-                                route = updateRoute.replace('accountId', categoryData['id']);
+                                route = updateRoute.replace('categoryId', categoryData['id']);
                                 method = "PUT";
                             }
 
@@ -358,6 +368,16 @@
                                     }
                                     else if(category['type'] === 2) {
                                         categoryListVm.incomes.push(category);
+                                        document.querySelector('#Btn_income').click();
+                                    }
+                                }
+                                else {
+                                    if(category['type'] === 1) {
+                                        categoryListVm.expenditures[categoryIndex] = category;
+                                        document.querySelector('#Btn_expenditure').click();
+                                    }
+                                    else if(category['type'] === 2) {
+                                        categoryListVm.incomes[categoryIndex] = category;
                                         document.querySelector('#Btn_income').click();
                                     }
                                 }

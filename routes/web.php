@@ -60,5 +60,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     // 類別
     Route::get('/categories', 'User\CategoryController@index')->name('Category_List');
     Route::post('/categories', 'User\CategoryController@store')->name('Create_Category');
+    Route::put('/categories/{id}', 'User\CategoryController@update')->name('Update_Category');
     Route::delete('/categories/{id}', 'User\CategoryController@destroy')->name('Delete_Category');
 });

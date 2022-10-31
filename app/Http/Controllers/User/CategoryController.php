@@ -111,9 +111,38 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        // Validation
+        $validated = $request->validate([
+            'type' => 'required|numeric',
+            'icon' => 'required|numeric',
+            'color' => 'required|numeric',
+            'name' => 'required|string|max:255',
+            'hidden' => 'nullable|boolean',
+        ]);
+        // Check Owner
+        $category = Category::where('id', $id)
+                            ->first();
+        if($category['user_id'] !== Auth::user()->id) {
+            return response()->json([
+                'message' => '不合法的操作',
+            ], 403);
+        }
+        // Update 
+        $category['type'] = $request['type'];
+        $category['icon'] = $request['icon'];
+        $category['color'] = $request['color'];
+        $category['name'] = $request['name'];
+        $category['hidden'] = !!$request['hidden'];
+        $category->save();
+        // Response
+        $category = Category::where('id', $category['id'])
+                            ->first();
+        return response()->json([
+            'message' => '更新成功',
+            'category' => $category,
+        ], 200);
     }
 
     /**
