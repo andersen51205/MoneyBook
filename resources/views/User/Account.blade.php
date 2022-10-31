@@ -181,6 +181,9 @@
                     changePage('edit');
                     if(index) {
                         accountFormVm.accountData = { ...this.accounts[index] };
+                        if(this.accounts[index]['hidden']) {
+                            accountFormVm.accountData['hidden'] = true;
+                        }
                         accountFormVm.accountIndex = index;
                     }
                 },
